@@ -1,6 +1,8 @@
 "use client";
 import { APP } from "@/lib/data/local/Nav";
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
+import { ThemeToggle } from "./ThemeToggle";
+import LOCAL_USER from "@/lib/data/local/User";
 
 type Props = {};
 
@@ -18,13 +20,16 @@ const Header = (props: Props) => {
             Friends
           </span>
         </div>
-        <Avatar>
-          <AvatarImage
-            className="w-10 rounded-full h-10"
-            src="https://github.com/lakshaykamat.png"
-          />
-          <AvatarFallback>LK</AvatarFallback>
-        </Avatar>
+        <div className="flex gap-2">
+          <ThemeToggle />
+          <Avatar>
+            <AvatarImage
+              className="w-10 rounded-full h-10"
+              src={LOCAL_USER.image}
+            />
+            <AvatarFallback>LK</AvatarFallback>
+          </Avatar>
+        </div>
       </nav>
     </header>
   );
