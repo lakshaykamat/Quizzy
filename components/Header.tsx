@@ -9,7 +9,7 @@ type Props = {};
 const Header = (props: Props) => {
   return (
     <header>
-      <nav className="bg-primary-foreground items-center py-3 flex justify-around">
+      <nav className="bg-background border-b-2 items-center py-3 flex justify-around">
         <h1 className="text-2xl font-bold">{APP.appName}</h1>
         <div className="flex gap-6">
           <span className="text-sm hover:underline cursor-pointer">Home</span>
