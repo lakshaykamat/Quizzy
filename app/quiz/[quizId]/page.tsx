@@ -2,29 +2,41 @@
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { getQuiz, shuffleArray } from "@/lib/utils";
+import CONSTANTS from "@/lib/data/Constants";
+import { INTERNET, getQuiz, shuffleQuestionAndOptions } from "@/lib/utils";
 import { Question, Quiz } from "@/types";
-import { useEffect, useState } from "react";
-
-type Props = {
-  questionList: Question[];
-};
+import useSWR from "swr";
 
 const Page = ({ params }: { params: { quizId: string } }) => {
   const { quizId } = params;
-  const [questions, setQuestion] = useState<Quiz | null>(null);
-  useEffect(() => {
-    setQuestion(getQuiz(quizId, 3));
-  });
-  if (!questions) return <h1>Loading</h1>;
-  return (
-    <div>
-      <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-7 mb-7">
-        {questions.name}
-      </h2>
-      <QuestionPage questionList={questions.questionsList} />
-    </div>
-  );
+
+  const {
+    isLoading,
+    data: quizes,
+    error,
+  } = useSWR(CONSTANTS.API_URL, INTERNET.quiz);
+
+  if (isLoading) return <h1>Loading</h1>;
+  if (error) return <h1>Error</h1>;
+
+  let quiz: Quiz | null = getQuiz(quizId, quizes as Quiz[]);
+
+  if (quiz) {
+    quiz = shuffleQuestionAndOptions(quiz, 2);
+
+    return (
+      <div>
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-7 mb-7">
+          {quiz.name}
+        </h2>
+        <QuestionPage questionList={quiz.questionsList} />
+      </div>
+    );
+  }
+};
+
+type Props = {
+  questionList: Question[];
 };
 
 const QuestionPage = (props: Props) => {

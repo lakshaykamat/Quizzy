@@ -1,0 +1,502 @@
+{
+  "quiz": [
+    {
+      "id": "WT4KlYBgA7",
+      "name": "Sport",
+      "image": "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "description": "Test your sports knowledge with questions about famous events, athletes, and championships from around the world.",
+      "category": "General",
+      "questionsList": [
+        {
+          "id": "Q20",
+          "question": "Which country hosted the Winter Olympics in 2018?",
+          "explanation": "South Korea hosted the Winter Olympics in 2018, showcasing various winter sports events.",
+          "options": [
+            {
+              "text": "Canada",
+              "isRight": false
+            },
+            {
+              "text": "Russia",
+              "isRight": false
+            },
+            {
+              "text": "South Korea",
+              "isRight": true
+            },
+            {
+              "text": "United States",
+              "isRight": false
+            }
+          ],
+          "category": "Sport"
+        },
+        {
+          "id": "Q3",
+          "question": "Who is known as 'The Greatest' in boxing?",
+          "explanation": "Muhammad Ali, also known as 'The Greatest,' was a legendary heavyweight boxer and cultural icon.",
+          "options": [
+            {
+              "text": "Mike Tyson",
+              "isRight": false
+            },
+            {
+              "text": "Muhammad Ali",
+              "isRight": true
+            },
+            {
+              "text": "Floyd Mayweather",
+              "isRight": false
+            },
+            {
+              "text": "Manny Pacquiao",
+              "isRight": false
+            }
+          ],
+          "category": "Sport"
+        },
+        {
+          "id": "Q2",
+          "question": "In which sport would you perform a slam dunk?",
+          "explanation": "A slam dunk is a scoring technique in basketball, where a player jumps and forcefully puts the ball through the hoop.",
+          "options": [
+            {
+              "text": "Tennis",
+              "isRight": false
+            },
+            {
+              "text": "Basketball",
+              "isRight": true
+            },
+            {
+              "text": "Swimming",
+              "isRight": false
+            },
+            {
+              "text": "Golf",
+              "isRight": false
+            }
+          ],
+          "category": "Sport"
+        },
+        {
+          "id": "Q1",
+          "question": "Who won the FIFA World Cup in 2018?",
+          "explanation": "France won the FIFA World Cup in 2018 by defeating Croatia in the final.",
+          "options": [
+            {
+              "text": "Brazil",
+              "isRight": false
+            },
+            {
+              "text": "Germany",
+              "isRight": false
+            },
+            {
+              "text": "France",
+              "isRight": true
+            },
+            {
+              "text": "Argentina",
+              "isRight": false
+            }
+          ],
+          "category": "Sport"
+        },
+        {
+          "id": "Q21",
+          "question": "Which tennis player holds the record for the most Grand Slam singles titles?",
+          "explanation": "Serena Williams holds the record for the most Grand Slam singles titles in the Open Era, with 23 championships.",
+          "options": [
+            {
+              "text": "Roger Federer",
+              "isRight": false
+            },
+            {
+              "text": "Rafael Nadal",
+              "isRight": false
+            },
+            {
+              "text": "Novak Djokovic",
+              "isRight": false
+            },
+            {
+              "text": "Serena Williams",
+              "isRight": true
+            }
+          ],
+          "category": "Sport"
+        },
+        {
+          "id": "Q22",
+          "question": "In which city did the first modern Olympics take place in 1896?",
+          "explanation": "The first modern Olympics took place in Athens, Greece, in 1896.",
+          "options": [
+            {
+              "text": "Paris",
+              "isRight": false
+            },
+            {
+              "text": "London",
+              "isRight": false
+            },
+            {
+              "text": "Berlin",
+              "isRight": false
+            },
+            {
+              "text": "Athens",
+              "isRight": true
+            }
+          ],
+          "category": "Sport"
+        },
+        {
+          "id": "Q23",
+          "question": "Who is the all-time leading scorer in the NBA?",
+          "explanation": "Kareem Abdul-Jabbar is the all-time leading scorer in the NBA, with 38,387 points.",
+          "options": [
+            {
+              "text": "Michael Jordan",
+              "isRight": false
+            },
+            {
+              "text": "LeBron James",
+              "isRight": false
+            },
+            {
+              "text": "Kobe Bryant",
+              "isRight": false
+            },
+            {
+              "text": "Kareem Abdul-Jabbar",
+              "isRight": true
+            }
+          ],
+          "category": "Sport"
+        },
+        {
+          "id": "Q24",
+          "question": "Which country hosted the 2016 Summer Olympics?",
+          "explanation": "Brazil hosted the 2016 Summer Olympics in Rio de Janeiro, showcasing various sports and cultural events.",
+          "options": [
+            {
+              "text": "United States",
+              "isRight": false
+            },
+            {
+              "text": "China",
+              "isRight": false
+            },
+            {
+              "text": "Russia",
+              "isRight": false
+            },
+            {
+              "text": "Brazil",
+              "isRight": true
+            }
+          ],
+          "category": "Sport"
+        },
+        {
+          "id": "Q25",
+          "question": "Who is the only athlete to win Olympic gold in both the 100m and 200m sprints in three consecutive Olympics?",
+          "explanation": "Usain Bolt, the Jamaican sprinter, achieved this feat in the 2008, 2012, and 2016 Summer Olympics.",
+          "options": [
+            {
+              "text": "Carl Lewis",
+              "isRight": false
+            },
+            {
+              "text": "Jesse Owens",
+              "isRight": false
+            },
+            {
+              "text": "Usain Bolt",
+              "isRight": true
+            },
+            {
+              "text": "Asafa Powell",
+              "isRight": false
+            }
+          ],
+          "category": "Sport"
+        },
+        {
+          "id": "Q26",
+          "question": "Which team has won the most Super Bowls in NFL history?",
+          "explanation": "The Pittsburgh Steelers have won the most Super Bowls in NFL history, with a total of six championships.",
+          "options": [
+            {
+              "text": "New England Patriots",
+              "isRight": false
+            },
+            {
+              "text": "San Francisco 49ers",
+              "isRight": false
+            },
+            {
+              "text": "Green Bay Packers",
+              "isRight": false
+            },
+            {
+              "text": "Pittsburgh Steelers",
+              "isRight": true
+            }
+          ],
+          "category": "Sport"
+        }
+      ]
+    },
+    {
+      "id": "V2PpEiGtR9",
+      "name": "Science",
+      "image": "https://images.unsplash.com/photo-1507413245164-6160d8298b31?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "description": "Explore the world of science with questions on chemistry, physics, biology, and astronomy to test your scientific knowledge.",
+      "category": "Science",
+      "questionsList": [
+        {
+          "id": "FB3D49A32E96E60A",
+          "question": "What is the chemical symbol for gold?",
+          "explanation": "The chemical symbol for gold is 'Au.' It comes from the Latin word 'aurum.'",
+          "options": [
+            {
+              "text": "Au",
+              "isRight": true
+            },
+            {
+              "text": "Ag",
+              "isRight": false
+            },
+            {
+              "text": "Fe",
+              "isRight": false
+            },
+            {
+              "text": "Cu",
+              "isRight": false
+            }
+          ],
+          "category": "Science"
+        },
+        {
+          "id": "DCEA2F9781B3DB42",
+          "question": "Who developed the theory of relativity?",
+          "explanation": "Albert Einstein developed the theory of relativity, revolutionizing our understanding of space, time, and gravity.",
+          "options": [
+            {
+              "text": "Isaac Newton",
+              "isRight": false
+            },
+            {
+              "text": "Galileo Galilei",
+              "isRight": false
+            },
+            {
+              "text": "Albert Einstein",
+              "isRight": true
+            },
+            {
+              "text": "Stephen Hawking",
+              "isRight": false
+            }
+          ],
+          "category": "Science"
+        },
+        {
+          "id": "59E8A3F68E4325D7",
+          "question": "What is the powerhouse of the cell?",
+          "explanation": "Mitochondria are the powerhouse of the cell. They produce energy (ATP) through cellular respiration.",
+          "options": [
+            {
+              "text": "Nucleus",
+              "isRight": false
+            },
+            {
+              "text": "Mitochondria",
+              "isRight": true
+            },
+            {
+              "text": "Endoplasmic Reticulum",
+              "isRight": false
+            },
+            {
+              "text": "Golgi Apparatus",
+              "isRight": false
+            }
+          ],
+          "category": "Science"
+        },
+        {
+          "id": "A27C6C3C447F78A9",
+          "question": "Which planet is known as the 'Red Planet'?",
+          "explanation": "Mars is known as the 'Red Planet' due to the iron oxide on its surface, giving it a reddish appearance.",
+          "options": [
+            {
+              "text": "Venus",
+              "isRight": false
+            },
+            {
+              "text": "Mars",
+              "isRight": true
+            },
+            {
+              "text": "Jupiter",
+              "isRight": false
+            },
+            {
+              "text": "Saturn",
+              "isRight": false
+            }
+          ],
+          "category": "Science"
+        },
+        {
+          "id": "Q27",
+          "question": "What is the chemical symbol for water?",
+          "explanation": "H2O is the chemical symbol for water, consisting of two hydrogen atoms and one oxygen atom.",
+          "options": [
+            {
+              "text": "CO2",
+              "isRight": false
+            },
+            {
+              "text": "H2O",
+              "isRight": true
+            },
+            {
+              "text": "O2",
+              "isRight": false
+            },
+            {
+              "text": "NaCl",
+              "isRight": false
+            }
+          ],
+          "category": "Science"
+        },
+        {
+          "id": "Q28",
+          "question": "Who developed the theory of relativity?",
+          "explanation": "Albert Einstein developed the theory of relativity, revolutionizing our understanding of space, time, and gravity.",
+          "options": [
+            {
+              "text": "Isaac Newton",
+              "isRight": false
+            },
+            {
+              "text": "Galileo Galilei",
+              "isRight": false
+            },
+            {
+              "text": "Albert Einstein",
+              "isRight": true
+            },
+            {
+              "text": "Stephen Hawking",
+              "isRight": false
+            }
+          ],
+          "category": "Science"
+        },
+        {
+          "id": "Q29",
+          "question": "What is the powerhouse of the cell?",
+          "explanation": "Mitochondria are often called the powerhouse of the cell, as they generate most of the cell's supply of adenosine triphosphate (ATP).",
+          "options": [
+            {
+              "text": "Nucleus",
+              "isRight": false
+            },
+            {
+              "text": "Mitochondria",
+              "isRight": true
+            },
+            {
+              "text": "Endoplasmic Reticulum",
+              "isRight": false
+            },
+            {
+              "text": "Golgi Apparatus",
+              "isRight": false
+            }
+          ],
+          "category": "Science"
+        },
+        {
+          "id": "Q30",
+          "question": "What is the largest planet in our solar system?",
+          "explanation": "Jupiter is the largest planet in our solar system, known for its massive size and strong magnetic field.",
+          "options": [
+            {
+              "text": "Venus",
+              "isRight": false
+            },
+            {
+              "text": "Mars",
+              "isRight": false
+            },
+            {
+              "text": "Jupiter",
+              "isRight": true
+            },
+            {
+              "text": "Saturn",
+              "isRight": false
+            }
+          ],
+          "category": "Science"
+        },
+        {
+          "id": "Q31",
+          "question": "Who is known as the father of modern physics?",
+          "explanation": "Sir Isaac Newton is often referred to as the father of modern physics, making significant contributions to classical mechanics.",
+          "options": [
+            {
+              "text": "Galileo Galilei",
+              "isRight": false
+            },
+            {
+              "text": "Niels Bohr",
+              "isRight": false
+            },
+            {
+              "text": "Albert Einstein",
+              "isRight": false
+            },
+            {
+              "text": "Isaac Newton",
+              "isRight": true
+            }
+          ],
+          "category": "Science"
+        },
+        {
+          "id": "Q32",
+          "question": "What is the process by which plants make their own food?",
+          "explanation": "Photosynthesis is the process by which plants convert light energy into chemical energy to produce their own food.",
+          "options": [
+            {
+              "text": "Respiration",
+              "isRight": false
+            },
+            {
+              "text": "Transpiration",
+              "isRight": false
+            },
+            {
+              "text": "Photosynthesis",
+              "isRight": true
+            },
+            {
+              "text": "Digestion",
+              "isRight": false
+            }
+          ],
+          "category": "Science"
+        }
+      ]
+    }
+  ]
+}
