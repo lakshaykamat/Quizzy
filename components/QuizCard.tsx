@@ -5,11 +5,11 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { Quiz } from "@/types";
+import { QuizType } from "@/types";
 import Link from "next/link";
 
 type QuizCardProps = {
-  quiz: Quiz;
+  quiz: QuizType;
 };
 
 const QuizCard = (props: QuizCardProps) => {
@@ -22,10 +22,10 @@ const QuizCard = (props: QuizCardProps) => {
         </h3>
       </CardHeader>
       <CardContent>
-        <p>{props.quiz.description}</p>
+        <p className="text-sm">{props.quiz.description}</p>
       </CardContent>
       <CardFooter>
-        <Link href={`/quiz/${props.quiz.id}`}>
+        <Link href={`/quiz/${props.quiz._id}`}>
           <Button>Start Quiz</Button>
         </Link>
       </CardFooter>

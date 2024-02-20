@@ -2,26 +2,24 @@
 
 import QuizCard from "@/components/QuizCard";
 import CONSTANTS from "@/lib/data/Constants";
-import QUIZ_LOCAL_DATA from "@/lib/data/local/quiz-and-questions";
 import { INTERNET } from "@/lib/utils";
-import { Quiz } from "@/types";
+import { QuizType } from "@/types";
 import useSWR from "swr";
 
 const Home = () => {
-  const {
-    isLoading,
-    data: quiz,
-    error,
-  } = useSWR(CONSTANTS.API_URL, INTERNET.quiz);
+  const { data: quizzes, error } = useSWR(CONSTANTS.API_URL, INTERNET.quiz);
 
-  if (error) return <div>failed to load</div>;
+  if (error) {
+    return <div>Failed to load</div>;
+  }
 
-  if (isLoading)
+  if (!quizzes) {
     return (
       <h1 className="scroll-m-20 my-7 text-4xl font-extrabold tracking-tight lg:text-5xl">
-        Loading
+        Loading...
       </h1>
     );
+  }
 
   return (
     <>
@@ -29,10 +27,13 @@ const Home = () => {
         Explore
       </h1>
       <div className="flex flex-wrap gap-12">
-        {quiz &&
-          quiz.map((quiz: Quiz) => {
-            return <QuizCard key={quiz.id} quiz={quiz} />;
-          })}
+        {quizzes.length > 0 ? (
+          quizzes.map((quiz: QuizType) => (
+            <QuizCard key={quiz._id} quiz={quiz} />
+          ))
+        ) : (
+          <h1>No categories</h1>
+        )}
       </div>
     </>
   );

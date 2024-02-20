@@ -4,35 +4,30 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import CONSTANTS from "@/lib/data/Constants";
 import { INTERNET, getQuiz, shuffleQuestionAndOptions } from "@/lib/utils";
-import { Question, Quiz } from "@/types";
+import { Question, QuizType } from "@/types";
 import useSWR from "swr";
 
 const Page = ({ params }: { params: { quizId: string } }) => {
   const { quizId } = params;
 
-  const {
-    isLoading,
-    data: quizes,
-    error,
-  } = useSWR(CONSTANTS.API_URL, INTERNET.quiz);
+  const { data: quizData, error } = useSWR(
+    () => `${CONSTANTS.API_URL}/questions?id=${quizId}&limit=${10}`,
+    INTERNET.questionsList
+  );
 
-  if (isLoading) return <h1>Loading</h1>;
-  if (error) return <h1>Error</h1>;
+  if (error) return <h1>Error loading data</h1>;
+  if (!quizData) return <h1>Loading...</h1>;
 
-  let quiz: Quiz | null = getQuiz(quizId, quizes as Quiz[]);
+  const { questionsList, name } = quizData;
 
-  if (quiz) {
-    quiz = shuffleQuestionAndOptions(quiz, 2);
-
-    return (
-      <div>
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-7 mb-7">
-          {quiz.name}
-        </h2>
-        <QuestionPage questionList={quiz.questionsList} />
-      </div>
-    );
-  }
+  return (
+    <div>
+      <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-7 mb-7">
+        {name}
+      </h2>
+      <QuestionPage questionList={questionsList} />
+    </div>
+  );
 };
 
 type Props = {
@@ -42,30 +37,26 @@ type Props = {
 const QuestionPage = (props: Props) => {
   return (
     <div>
-      {props.questionList.map((question) => {
-        return (
-          <div key={question.id} className="flex flex-col mb-7">
-            <h4 className="scroll-m-20 text-xl font-semibold tracking-tight mb-3">
-              {question.question}
-            </h4>
-            <RadioGroup defaultValue="comfortable">
-              {question.options.map((option, index) => {
-                return (
-                  <div
-                    key={`${index}${option.text}`}
-                    className="flex items-center space-x-2"
-                  >
-                    <RadioGroupItem value={option.text} id={option.text} />
-                    <Label className="text-md" htmlFor={option.text}>
-                      {option.text}
-                    </Label>
-                  </div>
-                );
-              })}
-            </RadioGroup>
-          </div>
-        );
-      })}
+      {props.questionList.map((question) => (
+        <div key={question.id} className="flex flex-col mb-7">
+          <h4 className="scroll-m-20 text-xl font-semibold tracking-tight mb-3">
+            {question.question}
+          </h4>
+          <RadioGroup defaultValue="comfortable">
+            {question.options.map((option, index) => (
+              <div
+                key={`${index}${option.text}`}
+                className="flex items-center space-x-2"
+              >
+                <RadioGroupItem value={option.text} id={option.text} />
+                <Label className="text-md" htmlFor={option.text}>
+                  {option.text}
+                </Label>
+              </div>
+            ))}
+          </RadioGroup>
+        </div>
+      ))}
       <Button>Submit</Button>
     </div>
   );
