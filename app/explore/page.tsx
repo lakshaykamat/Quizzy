@@ -1,7 +1,7 @@
 "use client";
 
 import QuizCard from "@/components/QuizCard";
-import CONSTANTS from "@/lib/data/Constants";
+import CONSTANTS from "@/lib/data/CONSTANTS";
 import { INTERNET } from "@/lib/utils";
 import { QuizType } from "@/types";
 import useSWR from "swr";
@@ -26,7 +26,7 @@ const Home = () => {
       <h1 className="scroll-m-20 my-7 text-4xl font-extrabold tracking-tight lg:text-5xl">
         Explore
       </h1>
-      <div className="flex flex-wrap gap-12">
+      <div className="grid flex-wrap gap-12 grid-cols-1 justify-center sm:grid-cols-2 lg:grid-cols-3">
         {quizzes.length > 0 ? (
           quizzes.map((quiz: QuizType) => (
             <QuizCard key={quiz._id} quiz={quiz} />

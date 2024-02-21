@@ -4,7 +4,7 @@ import { QuizType } from "@/types";
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(req: any, res: NextApiResponse) {
   try {
     await connectMongodb();
 
@@ -33,6 +33,9 @@ export async function GET(req: NextApiRequest, res: NextApiResponse) {
 
     // Apply the limit to the shuffled questions list
     const limitedQuestionsList = questionsList.slice(0, limit);
+    limitedQuestionsList.forEach((questionsList) => {
+      questionsList.options = shuffleArray(questionsList.options);
+    });
 
     return NextResponse.json({
       name: quiz?.name,
@@ -61,7 +64,6 @@ async function validateQuizId(
 ): Promise<{ isExist: boolean; quiz: QuizType | null }> {
   try {
     const quiz = await Quiz.findById(id);
-    console.log(quiz);
 
     return { isExist: !!quiz, quiz };
   } catch (error) {

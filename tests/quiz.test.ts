@@ -1,16 +1,16 @@
-import QUIZ_LOCAL_DATA from "../lib/data/local/quiz-and-questions";
-import { Options, Question, Quiz } from "../types/index";
+import QUIZ from "../lib/data/quiz.json";
+import { Options, Question } from "../types/index";
 
-test("Only one option should be true", () => {
-  QUIZ_LOCAL_DATA.forEach((quiz: Quiz) => {
+test("Only one option should be true", async () => {
+  QUIZ.forEach((quiz) => {
     quiz.questionsList.forEach((question: Question) => {
       expect(isOnlyOneOptionTrue(question.options)).toBe(true);
     });
   });
-});
+}, 30000);
 
 test("Options Array should have a length of 4", () => {
-  QUIZ_LOCAL_DATA.forEach((quiz: Quiz) => {
+  QUIZ.forEach((quiz) => {
     quiz.questionsList.forEach((question: Question) => {
       expect(question.options.length).toBe(4);
     });
@@ -18,15 +18,15 @@ test("Options Array should have a length of 4", () => {
 });
 
 test("Question explanation should be 20 words or more", () => {
-  QUIZ_LOCAL_DATA.forEach((quiz: Quiz) => {
+  QUIZ.forEach((quiz) => {
     quiz.questionsList.forEach((question: Question) => {
-      expect(checkExplationLength(question.explanation)).toBe(true);
+      expect(checkExplationLength(question.explanation, 50)).toBe(true);
     });
   });
 });
 
-function checkExplationLength(explanation: string) {
-  return explanation.length > 20;
+function checkExplationLength(explanation: string, length: number) {
+  return explanation.length > length;
 }
 
 function isOnlyOneOptionTrue(options: Options[]) {

@@ -5,7 +5,19 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import CONSTANTS from "@/lib/data/Constants";
 import { INTERNET, getQuiz, shuffleQuestionAndOptions } from "@/lib/utils";
 import { Question, QuizType } from "@/types";
+import { useState } from "react";
 import useSWR from "swr";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 const Page = ({ params }: { params: { quizId: string } }) => {
   const { quizId } = params;
@@ -37,10 +49,10 @@ type Props = {
 const QuestionPage = (props: Props) => {
   return (
     <div>
-      {props.questionList.map((question) => (
-        <div key={question.id} className="flex flex-col mb-7">
+      {props.questionList.map((question, index) => (
+        <div key={question.id} className="flex flex-col mb-12">
           <h4 className="scroll-m-20 text-xl font-semibold tracking-tight mb-3">
-            {question.question}
+            {index + 1}. {question.question}
           </h4>
           <RadioGroup defaultValue="comfortable">
             {question.options.map((option, index) => (

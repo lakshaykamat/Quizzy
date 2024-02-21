@@ -5,7 +5,7 @@ type Question = {
   question: string;
   explanation: string;
   options: Options[];
-  category: QuestionCategory;
+  category: QuestionCategory | string;
 };
 
 export default Question;

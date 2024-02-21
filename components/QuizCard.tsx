@@ -21,8 +21,8 @@ const QuizCard = (props: QuizCardProps) => {
           {props.quiz.name}
         </h3>
       </CardHeader>
-      <CardContent>
-        <p className="text-sm">{props.quiz.description}</p>
+      <CardContent className="flex">
+        <p className="text-sm flex-grow">{props.quiz.description}</p>
       </CardContent>
       <CardFooter>
         <Link href={`/quiz/${props.quiz._id}`}>

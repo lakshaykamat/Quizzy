@@ -2,7 +2,7 @@ import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { Question, QuizType } from "@/types";
 import axios from "axios";
-import CONSTANTS from "./data/Constants";
+import CONSTANTS from "./data/CONSTANTS";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
