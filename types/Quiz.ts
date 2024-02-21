@@ -1,11 +1,11 @@
 import { Question, QuestionCategory } from ".";
 
-type Quiz = {
-  id: string;
+type QuizType = {
+  _id: string;
   image: string;
   name: string;
   description: string;
   questionsList: Array<Question>;
-  category: QuestionCategory;
+  category: QuestionCategory | string;
 };
-export default Quiz;
+export default QuizType;

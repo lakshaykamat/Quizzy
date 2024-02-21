@@ -1,0 +1,480 @@
+[
+  {
+    "_id": {
+      "$oid": "65cf25e1dcd8c64138d72714"
+    },
+    "name": "Sport",
+    "image": "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "description": "Test your sports knowledge with questions about famous events, athletes, and championships from around the world.",
+    "category": "Sports",
+    "questionsList": [
+      {
+        "id": "Z8pYI2eeYQNwaHo5",
+        "question": "Which country hosted the Winter Olympics in 2018?",
+        "explanation": "South Korea hosted the Winter Olympics in 2018, showcasing various winter sports events.",
+        "options": [
+          {
+            "text": "Canada",
+            "isRight": false
+          },
+          {
+            "text": "Russia",
+            "isRight": false
+          },
+          {
+            "text": "South Korea",
+            "isRight": true
+          },
+          {
+            "text": "United States",
+            "isRight": false
+          }
+        ],
+        "category": "Sport"
+      },
+      {
+        "id": "Mq2Hz9WPD8iLshkx",
+        "question": "Who is known as 'The Greatest' in boxing?",
+        "explanation": "Muhammad Ali, also known as 'The Greatest,' was a legendary heavyweight boxer and cultural icon.",
+        "options": [
+          {
+            "text": "Mike Tyson",
+            "isRight": false
+          },
+          {
+            "text": "Muhammad Ali",
+            "isRight": true
+          },
+          {
+            "text": "Floyd Mayweather",
+            "isRight": false
+          },
+          {
+            "text": "Manny Pacquiao",
+            "isRight": false
+          }
+        ],
+        "category": "Sport"
+      },
+      {
+        "id": "FoNhjTS0IJ7p1jFT",
+        "question": "In which sport would you perform a slam dunk?",
+        "explanation": "A slam dunk is a scoring technique in basketball, where a player jumps and forcefully puts the ball through the hoop.",
+        "options": [
+          {
+            "text": "Tennis",
+            "isRight": false
+          },
+          {
+            "text": "Basketball",
+            "isRight": true
+          },
+          {
+            "text": "Swimming",
+            "isRight": false
+          },
+          {
+            "text": "Golf",
+            "isRight": false
+          }
+        ],
+        "category": "Sport"
+      },
+      {
+        "id": "qEPyGYPtk0qC5Zt9",
+        "question": "Who won the FIFA World Cup in 2018?",
+        "explanation": "France won the FIFA World Cup in 2018 by defeating Croatia in the final.",
+        "options": [
+          {
+            "text": "Brazil",
+            "isRight": false
+          },
+          {
+            "text": "Germany",
+            "isRight": false
+          },
+          {
+            "text": "France",
+            "isRight": true
+          },
+          {
+            "text": "Argentina",
+            "isRight": false
+          }
+        ],
+        "category": "Sport"
+      },
+      {
+        "id": "sgDgNMoXOGoeMEP8",
+        "question": "Which tennis player holds the record for the most Grand Slam singles titles?",
+        "explanation": "Serena Williams holds the record for the most Grand Slam singles titles in the Open Era, with 23 championships.",
+        "options": [
+          {
+            "text": "Roger Federer",
+            "isRight": false
+          },
+          {
+            "text": "Rafael Nadal",
+            "isRight": false
+          },
+          {
+            "text": "Novak Djokovic",
+            "isRight": false
+          },
+          {
+            "text": "Serena Williams",
+            "isRight": true
+          }
+        ],
+        "category": "Sport"
+      },
+      {
+        "id": "GNGskrDcyOIMquWT",
+        "question": "In which city did the first modern Olympics take place in 1896?",
+        "explanation": "The first modern Olympics took place in Athens, Greece, in 1896.",
+        "options": [
+          {
+            "text": "Paris",
+            "isRight": false
+          },
+          {
+            "text": "London",
+            "isRight": false
+          },
+          {
+            "text": "Berlin",
+            "isRight": false
+          },
+          {
+            "text": "Athens",
+            "isRight": true
+          }
+        ],
+        "category": "Sport"
+      },
+      {
+        "id": "ZlTMXt0HYVybywKY",
+        "question": "Who is the all-time leading scorer in the NBA?",
+        "explanation": "Kareem Abdul-Jabbar is the all-time leading scorer in the NBA, with 38,387 points.",
+        "options": [
+          {
+            "text": "Michael Jordan",
+            "isRight": false
+          },
+          {
+            "text": "LeBron James",
+            "isRight": false
+          },
+          {
+            "text": "Kobe Bryant",
+            "isRight": false
+          },
+          {
+            "text": "Kareem Abdul-Jabbar",
+            "isRight": true
+          }
+        ],
+        "category": "Sport"
+      },
+      {
+        "id": "LhMS81trWZMyC3ac",
+        "question": "Which country hosted the 2016 Summer Olympics?",
+        "explanation": "Brazil hosted the 2016 Summer Olympics in Rio de Janeiro, showcasing various sports and cultural events.",
+        "options": [
+          {
+            "text": "United States",
+            "isRight": false
+          },
+          {
+            "text": "China",
+            "isRight": false
+          },
+          {
+            "text": "Russia",
+            "isRight": false
+          },
+          {
+            "text": "Brazil",
+            "isRight": true
+          }
+        ],
+        "category": "Sport"
+      },
+      {
+        "id": "Iqi1bD48fEISibyo",
+        "question": "Who is the only athlete to win Olympic gold in both the 100m and 200m sprints in three consecutive Olympics?",
+        "explanation": "Usain Bolt, the Jamaican sprinter, achieved this feat in the 2008, 2012, and 2016 Summer Olympics.",
+        "options": [
+          {
+            "text": "Carl Lewis",
+            "isRight": false
+          },
+          {
+            "text": "Jesse Owens",
+            "isRight": false
+          },
+          {
+            "text": "Usain Bolt",
+            "isRight": true
+          },
+          {
+            "text": "Asafa Powell",
+            "isRight": false
+          }
+        ],
+        "category": "Sport"
+      },
+      {
+        "id": "bMYjppjRI0KOhvBS",
+        "question": "Which team has won the most Super Bowls in NFL history?",
+        "explanation": "The Pittsburgh Steelers have won the most Super Bowls in NFL history, with a total of six championships.",
+        "options": [
+          {
+            "text": "New England Patriots",
+            "isRight": false
+          },
+          {
+            "text": "San Francisco 49ers",
+            "isRight": false
+          },
+          {
+            "text": "Green Bay Packers",
+            "isRight": false
+          },
+          {
+            "text": "Pittsburgh Steelers",
+            "isRight": true
+          }
+        ],
+        "category": "Sport"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "65d2045a37f141c69ba25fd9"
+    },
+    "name": "Programming and Tech",
+    "image": "https://images.unsplash.com/photo-1619410283995-43d9134e7656?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "description": "Challenge your programming and tech knowledge with questions ranging from languages to algorithms. Test your skills in this dynamic quiz!",
+    "category": "Programming and tech",
+    "questionsList": [
+      {
+        "id": "XufiCONuUrqNZgk4",
+        "question": "What is the capital of Python?",
+        "explanation": "Python's capital is known as an interpreter that executes the code line by line.",
+        "options": [
+          {
+            "text": "Cupertino",
+            "isRight": false
+          },
+          {
+            "text": "Redmond",
+            "isRight": false
+          },
+          {
+            "text": "Mountain View",
+            "isRight": false
+          },
+          {
+            "text": "Interpreter",
+            "isRight": true
+          }
+        ],
+        "category": "Programming"
+      },
+      {
+        "id": "Y5f5hFiKv1E5zWs8",
+        "question": "Which programming language is known for its use in machine learning?",
+        "explanation": "Python is widely used in machine learning due to its simplicity and powerful libraries like TensorFlow and PyTorch.",
+        "options": [
+          {
+            "text": "Java",
+            "isRight": false
+          },
+          {
+            "text": "C++",
+            "isRight": false
+          },
+          {
+            "text": "Python",
+            "isRight": true
+          },
+          {
+            "text": "Ruby",
+            "isRight": false
+          }
+        ],
+        "category": "Programming"
+      },
+      {
+        "id": "OZGTzrY1EBWy0iWO",
+        "question": "What does HTML stand for?",
+        "explanation": "HTML stands for HyperText Markup Language, used for creating and structuring web pages.",
+        "options": [
+          {
+            "text": "Hyper Transfer Markup Language",
+            "isRight": false
+          },
+          {
+            "text": "HyperText Markup Language",
+            "isRight": true
+          },
+          {
+            "text": "High-Level Text Markup Language",
+            "isRight": false
+          },
+          {
+            "text": "Hyperlink and Text Markup Language",
+            "isRight": false
+          }
+        ],
+        "category": "Programming"
+      },
+      {
+        "id": "H3yzi07i4UTJc6e1",
+        "question": "What does CSS stand for?",
+        "explanation": "CSS stands for Cascading Style Sheets, used for styling the presentation of web pages.",
+        "options": [
+          {
+            "text": "Computer Style Sheets",
+            "isRight": false
+          },
+          {
+            "text": "Colorful Style Sheets",
+            "isRight": false
+          },
+          {
+            "text": "Cascading Style Sheets",
+            "isRight": true
+          },
+          {
+            "text": "Creative Style Sheets",
+            "isRight": false
+          }
+        ],
+        "category": "Tech"
+      },
+      {
+        "id": "LDxC2GfrxCcuOdQE",
+        "question": "Which programming language is commonly used for mobile app development?",
+        "explanation": "Java is widely used for Android app development, and Swift is used for iOS app development.",
+        "options": [
+          {
+            "text": "Java",
+            "isRight": true
+          },
+          {
+            "text": "Python",
+            "isRight": false
+          },
+          {
+            "text": "Swift",
+            "isRight": false
+          },
+          {
+            "text": "C#",
+            "isRight": false
+          }
+        ],
+        "category": "Programming"
+      },
+      {
+        "id": "CT7lxyRfMXUlAgzC",
+        "question": "What is the purpose of a CDN (Content Delivery Network) in web development?",
+        "explanation": "CDN helps distribute web content globally to reduce latency and improve page loading speed.",
+        "options": [
+          {
+            "text": "Code Development Network",
+            "isRight": false
+          },
+          {
+            "text": "Content Distribution Network",
+            "isRight": true
+          },
+          {
+            "text": "Centralized Data Network",
+            "isRight": false
+          },
+          {
+            "text": "Cloud Development Node",
+            "isRight": false
+          }
+        ],
+        "category": "Tech"
+      },
+      {
+        "id": "x2yjyPMxuqjeEOKv",
+        "question": "What does API stand for?",
+        "explanation": "API stands for Application Programming Interface, allowing different software applications to communicate with each other.",
+        "options": [
+          {
+            "text": "Application Programming Interface",
+            "isRight": true
+          },
+          {
+            "text": "Advanced Programming Interface",
+            "isRight": false
+          },
+          {
+            "text": "Automated Programming Interface",
+            "isRight": false
+          },
+          {
+            "text": "Application Protocol Interface",
+            "isRight": false
+          }
+        ],
+        "category": "Programming"
+      },
+      {
+        "id": "2XM02Gr9FhSbjT7e",
+        "question": "What is the purpose of version control systems like Git?",
+        "explanation": "Version control systems help track changes in code, collaborate with others, and manage different versions of a project.",
+        "options": [
+          {
+            "text": "Backup files",
+            "isRight": false
+          },
+          {
+            "text": "Manage project versions",
+            "isRight": true
+          },
+          {
+            "text": "Create databases",
+            "isRight": false
+          },
+          {
+            "text": "Optimize code performance",
+            "isRight": false
+          }
+        ],
+        "category": "Programming"
+      },
+      {
+        "id": "ifCfVJdSQ3aYEwpc",
+        "question": "What is the significance of the '404' HTTP status code?",
+        "explanation": "The '404 Not Found' status code indicates that the requested resource could not be found on the server.",
+        "options": [
+          {
+            "text": "Server error",
+            "isRight": false
+          },
+          {
+            "text": "Page found",
+            "isRight": false
+          },
+          {
+            "text": "Page moved permanently",
+            "isRight": false
+          },
+          {
+            "text": "Resource not found",
+            "isRight": true
+          }
+        ],
+        "category": "Tech"
+      }
+    ]
+  }
+]
