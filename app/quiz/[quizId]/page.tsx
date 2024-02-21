@@ -2,7 +2,6 @@
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import CONSTANTS from "@/lib/data/Constants";
 import { INTERNET, getQuiz, shuffleQuestionAndOptions } from "@/lib/utils";
 import { Question, QuizType } from "@/types";
 import { useState } from "react";
@@ -23,7 +22,7 @@ const Page = ({ params }: { params: { quizId: string } }) => {
   const { quizId } = params;
 
   const { data: quizData, error } = useSWR(
-    () => `${CONSTANTS.API_URL}/questions?id=${quizId}&limit=${10}`,
+    () => `${"http://localhost:3000/api"}/questions?id=${quizId}&limit=${10}`,
     INTERNET.questionsList
   );
 
