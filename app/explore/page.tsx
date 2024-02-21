@@ -1,13 +1,15 @@
 "use client";
 
 import QuizCard from "@/components/QuizCard";
-import CONSTANTS from "@/lib/data/CONSTANTS";
 import { INTERNET } from "@/lib/utils";
 import { QuizType } from "@/types";
 import useSWR from "swr";
 
 const Home = () => {
-  const { data: quizzes, error } = useSWR(CONSTANTS.API_URL, INTERNET.quiz);
+  const { data: quizzes, error } = useSWR(
+    process.env.NEXT_PUBLIC_WEB_URL,
+    INTERNET.quiz
+  );
 
   if (error) {
     return <div>Failed to load</div>;

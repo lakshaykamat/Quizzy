@@ -1,4 +1,4 @@
 const CONSTANTS = {
-  API_URL: "http://localhost:3000/api",
+  API_URL: process.env.NEXT_PUBLIC_WEB_URL,
 };
 export default CONSTANTS;

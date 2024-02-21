@@ -2,7 +2,6 @@ import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { Question, QuizType } from "@/types";
 import axios from "axios";
-import CONSTANTS from "./data/CONSTANTS";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -48,7 +47,7 @@ export const INTERNET = {
 
 async function fetchData(): Promise<QuizType[]> {
   try {
-    const response = await axios.get(CONSTANTS.API_URL + "/quiz");
+    const response = await axios.get(process.env.NEXT_PUBLIC_WEB_URL + "/quiz");
     return response.data.quizes as QuizType[];
   } catch (error: any) {
     console.error("Error fetching data:", error);

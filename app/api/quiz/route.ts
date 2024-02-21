@@ -8,5 +8,11 @@ export async function GET(req: any, res: NextApiResponse) {
     await connectMongodb();
     const quizes = await Quiz.find();
     return NextResponse.json({ quizes });
-  } catch (err) {}
+  } catch (err) {
+    console.log(err);
+    return NextResponse.json({
+      isError: true,
+      message: "Something went wrong!",
+    });
+  }
 }
