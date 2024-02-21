@@ -24,10 +24,13 @@ const QuizCard = (props: QuizCardProps) => {
       <CardContent className="flex">
         <p className="text-sm flex-grow">{props.quiz.description}</p>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="flex justify-between">
         <Link href={`/quiz/${props.quiz._id}`}>
           <Button>Start Quiz</Button>
         </Link>
+        <div>
+          <p className="text-sm">{props.quiz.questionsList.length} Qusetions</p>
+        </div>
       </CardFooter>
     </Card>
   );
