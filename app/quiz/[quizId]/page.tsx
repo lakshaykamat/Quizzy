@@ -22,7 +22,8 @@ const Page = ({ params }: { params: { quizId: string } }) => {
   const { quizId } = params;
 
   const { data: quizData, error } = useSWR(
-    () => `${"http://localhost:3000/api"}/questions?id=${quizId}&limit=${10}`,
+    () =>
+      `${process.env.NEXT_PUBLIC_WEB_URL}/questions?id=${quizId}&limit=${10}`,
     INTERNET.questionsList
   );
 

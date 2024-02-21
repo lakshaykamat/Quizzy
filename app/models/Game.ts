@@ -16,7 +16,7 @@ const gameSchema = new Schema(
       required: true,
     },
     questionsList: {
-      type: String,
+      type: Array,
       required: true,
     },
   },

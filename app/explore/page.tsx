@@ -7,7 +7,7 @@ import useSWR from "swr";
 
 const Home = () => {
   const { data: quizzes, error } = useSWR(
-    "http://localhost:3000/api",
+    process.env.NEXT_PUBLIC_WEB_URL,
     INTERNET.quiz
   );
 

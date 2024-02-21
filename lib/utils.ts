@@ -47,7 +47,7 @@ export const INTERNET = {
 
 async function fetchData(): Promise<QuizType[]> {
   try {
-    const response = await axios.get("http://localhost:3000/api" + "/quiz");
+    const response = await axios.get(process.env.NEXT_PUBLIC_WEB_URL + "/quiz");
     return response.data.quizes as QuizType[];
   } catch (error: any) {
     console.error("Error fetching data:", error);
