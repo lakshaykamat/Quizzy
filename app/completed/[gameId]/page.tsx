@@ -20,10 +20,10 @@ const FinalPage = ({ params }: { params: { gameId: string } }) => {
     return <h1>Loading...</h1>;
   }
   if (gameData) {
+    console.log(gameData);
     const wrongAnswers = gameData.game.userResult.filter(
       (result) => !result.isCorrect
     );
-    console.log(wrongAnswers.length);
     const rightAnswers = gameData.game.userResult.filter(
       (result) => result.isCorrect
     );
