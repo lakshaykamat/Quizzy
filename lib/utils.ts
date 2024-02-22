@@ -47,10 +47,14 @@ async function fetchData(): Promise<QuizType[]> {
 }
 async function fetchQuestionsList(
   url: string
-): Promise<{ name: string; questionsList: Question[] }> {
+): Promise<{ quizId: string; name: string; questionsList: Question[] }> {
   try {
     const response = await axios.get(url);
-    return response.data as { name: string; questionsList: Question[] };
+    return response.data as {
+      quizId: string;
+      name: string;
+      questionsList: Question[];
+    };
   } catch (error: any) {
     console.error("Error fetching data:", error);
     return error;
