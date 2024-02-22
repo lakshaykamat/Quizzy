@@ -39,6 +39,7 @@ export interface Option {
 
 async function fetchGameData(url: string): Promise<GameData> {
   try {
+    console.log(url);
     const response = await axios.get(url);
     return response.data as GameData;
   } catch (error: any) {
