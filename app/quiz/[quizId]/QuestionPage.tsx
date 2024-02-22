@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import useSWR from "swr";
 import { useRouter } from "next/navigation";
 import AXIOS from "@/lib/axiosHelper";
+import { UserResponseData } from "@/lib/axiosHelper/postUserResponse";
 
 type Props = {
   questionList: Question[];
@@ -33,6 +34,7 @@ const QuestionPage = (props: Props) => {
 
   const { mutate: mutateData } = useSWR(
     ["/questions", formData],
+    //@ts-ignore
     AXIOS.postUserResponseOfQuestions
   );
 
@@ -61,7 +63,7 @@ const QuestionPage = (props: Props) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const data = {
+    const data: UserResponseData = {
       quizId: props.quizId,
       userResponse: Array.from(formData),
     };
@@ -71,9 +73,13 @@ const QuestionPage = (props: Props) => {
       mutateData();
 
       // Perform the POST request and update the cache
-      const res = await AXIOS.postUserResponseOfQuestions("/questions", data);
+      const res: any = await AXIOS.postUserResponseOfQuestions(
+        "/questions",
+        data
+      );
 
       // Manually trigger a re-fetch to get the updated data
+      //@ts-ignore
       await mutateData(["/questions", data]);
       console.log(res);
       router.push(`/completed/${res.game._id}`);

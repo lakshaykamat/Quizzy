@@ -9,7 +9,7 @@ import { UserResponse, RequestBody } from "./postRequestBody";
 import getRightAnswer from "./getRightAnswer";
 import Game from "@/app/models/Game";
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(req: any, res: NextApiResponse) {
   try {
     await connectMongodb();
 
@@ -54,7 +54,7 @@ export async function GET(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: any, res: NextApiResponse) {
   try {
     await connectMongodb();
     //@ts-ignore
