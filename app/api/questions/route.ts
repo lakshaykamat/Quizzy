@@ -7,6 +7,7 @@ import validateQuizId from "./validateQuizId";
 import { shuffleArray } from "@/lib/utils";
 import { UserResponse, RequestBody } from "./postRequestBody";
 import getRightAnswer from "./getRightAnswer";
+import Game from "@/app/models/Game";
 
 export async function GET(req: NextApiRequest, res: NextApiResponse) {
   try {
@@ -100,7 +101,7 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
     const totalScore = userResult.filter((result) => result?.isCorrect).length;
     const percentage = ((totalScore / userResponse.length) * 100).toFixed(2);
 
-    return NextResponse.json({
+    const newGame = await Game.create({
       totalScore,
       percen: parseFloat(percentage),
       totalQuestions: userResponse.length,
@@ -108,6 +109,7 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
       quizId: data.quizId,
       userResult,
     });
+    return NextResponse.json({ game: newGame });
   } catch (error) {
     console.error("Error:", error);
     return NextResponse.json({
