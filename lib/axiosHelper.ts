@@ -1,4 +1,8 @@
 import axiosInstance from "./axios";
+import fetchGameData from "./axiosHelper/fetchGameData";
+import postUserResponseOfQuestions from "./axiosHelper/postUserResponse";
+import fetchQuestionsList from "./axiosHelper/fetchQuestionsList";
+import fetchQuiz from "./axiosHelper/fetchQuiz";
 
 const registerUser = async (userData: any) => {
   try {
@@ -13,5 +17,9 @@ const registerUser = async (userData: any) => {
 
 const AXIOS = {
   register: registerUser,
+  fetchGameData,
+  postUserResponseOfQuestions,
+  fetchQuestionsList,
+  fetchQuiz,
 };
 export default AXIOS;
