@@ -1,14 +1,14 @@
 "use client";
 
 import QuizCard from "@/components/QuizCard";
-import { INTERNET } from "@/lib/utils";
+import AXIOS from "@/lib/axiosHelper";
 import { QuizType } from "@/types";
 import useSWR from "swr";
 
 const Home = () => {
   const { data: quizzes, error } = useSWR(
     process.env.NEXT_PUBLIC_WEB_URL,
-    INTERNET.quiz
+    AXIOS.fetchQuiz
   );
 
   if (error) {
