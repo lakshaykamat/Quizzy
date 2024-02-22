@@ -3,8 +3,12 @@ import { connectMongodb } from "@/lib/mongodb";
 import { QuizType } from "@/types";
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
+import validateQuizId from "./validateQuizId";
+import { shuffleArray } from "@/lib/utils";
+import { UserResponse, RequestBody } from "./postRequestBody";
+import getRightAnswer from "./getRightAnswer";
 
-export async function GET(req: any, res: NextApiResponse) {
+export async function GET(req: NextApiRequest, res: NextApiResponse) {
   try {
     await connectMongodb();
 
@@ -26,20 +30,83 @@ export async function GET(req: any, res: NextApiResponse) {
       });
     }
 
-    let questionsList = quiz?.questionsList || [];
-
-    // Shuffle the questions list using the Fisher-Yates shuffle algorithm
-    questionsList = shuffleArray(questionsList);
-
-    // Apply the limit to the shuffled questions list
-    const limitedQuestionsList = questionsList.slice(0, limit);
-    limitedQuestionsList.forEach((questionsList) => {
-      questionsList.options = shuffleArray(questionsList.options);
+    // Simplify the shuffling logic
+    const shuffledQuestionsList = shuffleArray(quiz?.questionsList || []).slice(
+      0,
+      limit
+    );
+    shuffledQuestionsList.forEach((question) => {
+      question.options = shuffleArray(question.options);
     });
 
     return NextResponse.json({
+      quizId: quiz?._id,
       name: quiz?.name,
-      questionsList: limitedQuestionsList,
+      questionsList: shuffledQuestionsList,
+    });
+  } catch (error) {
+    console.error("Error:", error);
+    return NextResponse.json({
+      isError: true,
+      message: "Internal Server Error",
+    });
+  }
+}
+
+export async function POST(req: NextApiRequest, res: NextApiResponse) {
+  try {
+    await connectMongodb();
+    //@ts-ignore
+    const data: RequestBody = await req.json();
+    const userResponse: UserResponse[] = data.userResponse;
+
+    const { isExist, quiz } = await validateQuizId(data.quizId);
+
+    if (!isExist || !quiz) {
+      return NextResponse.json({
+        isError: true,
+        message: "Quiz does not exist with this id",
+      });
+    }
+
+    const userResult = await Promise.all(
+      userResponse.map(async (response) => {
+        const rightAnswer = await getRightAnswer(
+          response.question.id,
+          data.quizId
+        );
+        if (!rightAnswer)
+          return {
+            ...response,
+            rightAnswer: null,
+            isCorrect: null,
+          };
+
+        return {
+          ...response,
+          rightAnswer,
+          isCorrect: rightAnswer === response.userChoice,
+        };
+      })
+    );
+
+    if (!userResult) {
+      return NextResponse.json({
+        isError: true,
+        message: "Something went wrong!",
+      });
+    }
+
+    const totalScore = userResult.filter((result) => result?.isCorrect).length;
+    const percentage = ((totalScore / userResponse.length) * 100).toFixed(2);
+
+    return NextResponse.json({
+      totalScore,
+      percen: parseFloat(percentage),
+      totalQuestions: userResponse.length,
+      userId: "USER_ID",
+      quizId: data.quizId,
+      userResult,
     });
   } catch (error) {
     console.error("Error:", error);
@@ -57,26 +124,4 @@ function extractQueryFromRequest(req: NextApiRequest) {
     id: params.get("id"),
     limit: parseInt(params.get("limit") || "10", 10),
   };
-}
-
-async function validateQuizId(
-  id: string
-): Promise<{ isExist: boolean; quiz: QuizType | null }> {
-  try {
-    const quiz = await Quiz.findById(id);
-
-    return { isExist: !!quiz, quiz };
-  } catch (error) {
-    console.error("Error validating quiz id:", error);
-    return { isExist: false, quiz: null };
-  }
-}
-
-function shuffleArray<T>(array: T[]): T[] {
-  // Fisher-Yates (Knuth) shuffle algorithm
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
 }

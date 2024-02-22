@@ -2,10 +2,19 @@ import mongoose, { Schema, models } from "mongoose";
 
 const gameSchema = new Schema(
   {
-    score: {
+    totalScore: {
       type: String,
       required: true,
     },
+    totalQuestions: {
+      type: String,
+      required: true,
+    },
+    percen: {
+      type: String,
+      required: true,
+    },
+
     userId: {
       type: String,
       required: true,
@@ -15,7 +24,7 @@ const gameSchema = new Schema(
       type: String,
       required: true,
     },
-    questionsList: {
+    userResult: {
       type: Array,
       required: true,
     },
