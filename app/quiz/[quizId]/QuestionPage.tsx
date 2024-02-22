@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { RadioGroup } from "@/components/ui/radio-group";
+import useSWR from "swr";
+import { useRouter } from "next/navigation";
+import AXIOS from "@/lib/axiosHelper";
 
 type Props = {
   questionList: Question[];
   quizId: string;
 };
+
 export interface Root {
   userChoice: string;
   question: Question;
@@ -26,20 +29,22 @@ export interface Option {
 
 const QuestionPage = (props: Props) => {
   const [formData, setFormData] = useState<Root[]>([]);
+  const router = useRouter();
+
+  const { mutate: mutateData } = useSWR(
+    ["/questions", formData],
+    AXIOS.postUserResponseOfQuestions
+  );
 
   const handleOptionChange = (
     questionId: string,
     userChoice: string,
     question: any
   ) => {
-    console.log(formData);
-    // Check if the questionId is already in formData
     const existingQuestion = formData.find(
       (item: any) => item.questionId === questionId
     );
 
-    console.log(question);
-    // If exists, update the userChoice, else add a new entry
     if (existingQuestion) {
       setFormData((prevData) =>
         prevData.map((item: any) =>
@@ -53,13 +58,28 @@ const QuestionPage = (props: Props) => {
     }
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Submitted data:", {
+
+    const data = {
       quizId: props.quizId,
-      userResponse: [...formData],
-    });
-    // Handle the submitted data (e.g., send it to the server)
+      userResponse: Array.from(formData),
+    };
+
+    try {
+      // Set loading to true during the mutation
+      mutateData();
+
+      // Perform the POST request and update the cache
+      const res = await AXIOS.postUserResponseOfQuestions("/questions", data);
+
+      // Manually trigger a re-fetch to get the updated data
+      await mutateData(["/questions", data]);
+      console.log(res);
+      router.push(`/completed/${res.game._id}`);
+    } catch (error) {
+      console.error("Error posting data:", error);
+    }
   };
 
   return (
@@ -69,9 +89,9 @@ const QuestionPage = (props: Props) => {
           <h4 className="scroll-m-20 text-xl font-semibold tracking-tight mb-3">
             {index + 1}. {question.question}
           </h4>
-          <RadioGroup defaultValue="comfortable">
+          <div>
             {question.options.map((option, index) => (
-              <div className="flex items-center space-x-2" key={index}>
+              <div className="flex items-center space-x-2 mb-2" key={index}>
                 <input
                   required
                   type="radio"
@@ -90,7 +110,7 @@ const QuestionPage = (props: Props) => {
                 <label htmlFor={option.text}>{option.text}</label>
               </div>
             ))}
-          </RadioGroup>
+          </div>
         </div>
       ))}
 

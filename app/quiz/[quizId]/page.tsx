@@ -1,15 +1,15 @@
 "use client";
-import { INTERNET } from "@/lib/utils";
 import useSWR from "swr";
 import QuestionPage from "./QuestionPage";
+import AXIOS from "@/lib/axiosHelper";
 
 const Page = ({ params }: { params: { quizId: string } }) => {
   const { quizId } = params;
 
   const { data: quizData, error } = useSWR(
     () =>
-      `${process.env.NEXT_PUBLIC_WEB_URL}/questions?id=${quizId}&limit=${10}`,
-    INTERNET.questionsList,
+      `${process.env.NEXT_PUBLIC_WEB_URL}/questions?id=${quizId}&limit=${2}`,
+    AXIOS.fetchQuestionsList,
     {
       revalidateOnFocus: false, // Disable refetching on focus
       revalidateOnReconnect: false, // Disable refetching on reconnect
