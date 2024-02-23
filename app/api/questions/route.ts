@@ -16,19 +16,39 @@ export async function GET(req: any, res: NextApiResponse) {
     const { id, limit } = extractQueryFromRequest(req);
 
     if (!id) {
-      return NextResponse.json({
-        isError: true,
-        message: "Specify 'id' in the query parameters",
-      });
+      return NextResponse.json(
+        {
+          isError: true,
+          message: "Specify 'id' in the query parameters",
+        },
+        {
+          status: 200,
+          headers: {
+            "Access-Control-Allow-Origin": req.headers.get("origin") || "*",
+            "Content-Type": "application/json",
+          },
+        }
+      );
     }
 
     const { isExist, quiz } = await validateQuizId(id);
 
     if (!isExist) {
-      return NextResponse.json({
-        isError: true,
-        message: "Quiz doesn't exist with this id",
-      });
+      console.log(quiz);
+      return NextResponse.json(
+        {
+          quiz,
+          isError: true,
+          message: "Quiz doesn't exist with this id",
+        },
+        {
+          status: 404,
+          headers: {
+            "Access-Control-Allow-Origin": req.headers.get("origin") || "*",
+            "Content-Type": "application/json",
+          },
+        }
+      );
     }
 
     // Simplify the shuffling logic

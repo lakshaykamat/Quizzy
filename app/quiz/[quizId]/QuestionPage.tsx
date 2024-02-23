@@ -32,17 +32,18 @@ const QuestionPage = (props: Props) => {
   const [formData, setFormData] = useState<Root[]>([]);
   const router = useRouter();
 
-  const { mutate: mutateData } = useSWR(
-    ["/questions", formData],
-    //@ts-ignore
-    AXIOS.postUserResponseOfQuestions
-  );
+  // const { mutate: mutateData } = useSWR(
+  //   ["/questions"],
+  //   //@ts-ignore
+  //   AXIOS.postUserResponseOfQuestions
+  // );
 
   const handleOptionChange = (
     questionId: string,
     userChoice: string,
     question: any
   ) => {
+    console.log(formData);
     const existingQuestion = formData.find(
       (item: any) => item.questionId === questionId
     );
@@ -56,31 +57,35 @@ const QuestionPage = (props: Props) => {
         )
       );
     } else {
-      setFormData((prevData) => [...prevData, { userChoice, question }]);
+      setFormData((prevData) => [
+        ...prevData,
+        { userChoice, questionId, question },
+      ]);
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const handleSubmit = async () => {
+    console.log("form data");
+    console.log(formData);
+    console.log(Array.from(formData));
     const data: UserResponseData = {
       quizId: props.quizId,
       userResponse: Array.from(formData),
     };
+    console.log(data);
 
     try {
       // Set loading to true during the mutation
-      mutateData();
+      //await mutateData([`/questions`], false);
 
       // Perform the POST request and update the cache
-      const res: any = await AXIOS.postUserResponseOfQuestions(
-        "/questions",
-        data
-      );
+      const res: any = await AXIOS.postUserResponseOfQuestions("/questions", {
+        data,
+        quizId: props.quizId,
+      });
 
       // Manually trigger a re-fetch to get the updated data
-      //@ts-ignore
-      await mutateData(["/questions", data]);
+      //await mutateData([`/questions`]);
       console.log(res);
       router.push(`/completed/${res.game._id}`);
     } catch (error) {
@@ -89,7 +94,7 @@ const QuestionPage = (props: Props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div>
       {props.questionList.map((question, index) => (
         <div key={question.id} className="flex flex-col mb-12">
           <h4 className="scroll-m-20 text-xl font-semibold tracking-tight mb-3">
@@ -120,8 +125,10 @@ const QuestionPage = (props: Props) => {
         </div>
       ))}
 
-      <Button type="submit">Submit</Button>
-    </form>
+      <Button type="button" onClick={handleSubmit}>
+        Submit
+      </Button>
+    </div>
   );
 };
 

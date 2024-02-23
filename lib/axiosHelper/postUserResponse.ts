@@ -29,13 +29,19 @@ async function postUserResponseOfQuestions(
   data: UserResponseData
 ): Promise<GameData | unknown> {
   try {
+    console.log(process.env.NEXT_PUBLIC_WEB_URL + url[0]);
+    console.log(url);
+    console.log(data);
+    let da = data?.data;
     const response = await axios.post(
-      process.env.NEXT_PUBLIC_WEB_URL + url,
-      data,
+      process.env.NEXT_PUBLIC_WEB_URL + "/questions",
+      da,
       {
         headers: { "Content-Type": "application/json" },
       }
     );
+    console.log(url);
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error("Error posting data:", error);
