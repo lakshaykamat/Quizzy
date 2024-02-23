@@ -40,11 +40,20 @@ export async function GET(req: any, res: NextApiResponse) {
       question.options = shuffleArray(question.options);
     });
 
-    return NextResponse.json({
-      quizId: quiz?._id,
-      name: quiz?.name,
-      questionsList: shuffledQuestionsList,
-    });
+    return NextResponse.json(
+      {
+        quizId: quiz?._id,
+        name: quiz?.name,
+        questionsList: shuffledQuestionsList,
+      },
+      {
+        status: 200,
+        headers: {
+          "Access-Control-Allow-Origin": req.headers.get("origin") || "*",
+          "Content-Type": "application/json",
+        },
+      }
+    );
   } catch (error) {
     console.error("Error:", error);
     return NextResponse.json({

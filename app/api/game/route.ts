@@ -14,7 +14,16 @@ export async function GET(req: any, res: NextApiResponse) {
         message: "Specify game id in query",
       });
     const game = await Game.findById(id);
-    return NextResponse.json({ game });
+    return NextResponse.json(
+      { game },
+      {
+        status: 200,
+        headers: {
+          "Access-Control-Allow-Origin": req.headers.get("origin") || "*",
+          "Content-Type": "application/json",
+        },
+      }
+    );
   } catch (err) {
     console.log(err);
     return NextResponse.json({
