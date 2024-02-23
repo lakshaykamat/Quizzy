@@ -68,7 +68,7 @@ const QuestionPage = (props: Props) => {
     console.log("form data");
     console.log(formData);
     console.log(Array.from(formData));
-    const data: UserResponseData = {
+    const data: any = {
       quizId: props.quizId,
       userResponse: Array.from(formData),
     };

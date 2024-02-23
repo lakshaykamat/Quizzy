@@ -2,8 +2,11 @@ import axios from "axios";
 import { GameData } from "./fetchGameData";
 
 export interface UserResponseData {
+  data: {
+    quizId: string;
+    userResponse: UserResponse[];
+  };
   quizId: string;
-  userResponse: UserResponse[];
 }
 
 export interface UserResponse {
