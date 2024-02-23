@@ -12,7 +12,7 @@ export async function GET(req: Request, res: NextApiResponse) {
       {
         status: 200,
         headers: {
-          "Access-Control-Allow-Origin": req.headers.get("origin") || "*",
+          "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
         },
       }

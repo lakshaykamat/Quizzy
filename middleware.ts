@@ -6,12 +6,14 @@ const allowedOrigins =
         "https://quiz-web-app-virid.vercel.app",
         "quiz-web-app-virid.vercel.app",
         "https://www.quiz-web-app-virid.vercel.app",
+        "http://localhost:3000",
+        "http://localhost:3000/api/",
       ]
     : ["http://localhost:3000"];
 
 export async function middleware(request: Request) {
   const origin = request.headers.get("origin");
-  if (origin && !allowedOrigins.includes(origin)) {
+  if (false) {
     return new NextResponse("Bad request", {
       status: 400,
       statusText: "Bad request",

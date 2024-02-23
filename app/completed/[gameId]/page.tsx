@@ -12,7 +12,7 @@ const FinalPage = ({ params }: { params: { gameId: string } }) => {
     error,
     isLoading,
   } = useSWR(
-    () => `${process.env.NEXT_PUBLIC_WEB_URL}/game/?id=${gameId}`,
+    () => `${process.env.NEXT_PUBLIC_WEB_URL}/game/${gameId}`,
     AXIOS.fetchGameData
   );
 

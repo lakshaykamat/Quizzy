@@ -24,7 +24,7 @@ export async function GET(req: any, res: NextApiResponse) {
         {
           status: 200,
           headers: {
-            "Access-Control-Allow-Origin": req.headers.get("origin") || "*",
+            "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
           },
         }
@@ -44,7 +44,7 @@ export async function GET(req: any, res: NextApiResponse) {
         {
           status: 404,
           headers: {
-            "Access-Control-Allow-Origin": req.headers.get("origin") || "*",
+            "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
           },
         }
@@ -69,7 +69,7 @@ export async function GET(req: any, res: NextApiResponse) {
       {
         status: 200,
         headers: {
-          "Access-Control-Allow-Origin": req.headers.get("origin") || "*",
+          "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
         },
       }
@@ -93,10 +93,19 @@ export async function POST(req: any, res: NextApiResponse) {
     const { isExist, quiz } = await validateQuizId(data.quizId);
 
     if (!isExist || !quiz) {
-      return NextResponse.json({
-        isError: true,
-        message: "Quiz does not exist with this id",
-      });
+      return NextResponse.json(
+        {
+          isError: true,
+          message: "Quiz does not exist with this id",
+        },
+        {
+          status: 404,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+        }
+      );
     }
 
     const userResult = await Promise.all(
@@ -121,10 +130,19 @@ export async function POST(req: any, res: NextApiResponse) {
     );
 
     if (!userResult) {
-      return NextResponse.json({
-        isError: true,
-        message: "Something went wrong!",
-      });
+      return NextResponse.json(
+        {
+          isError: true,
+          message: "Something went wrong!",
+        },
+        {
+          status: 500,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+        }
+      );
     }
 
     const totalScore = userResult.filter((result) => result?.isCorrect).length;
@@ -138,7 +156,16 @@ export async function POST(req: any, res: NextApiResponse) {
       quizId: data.quizId,
       userResult,
     });
-    return NextResponse.json({ game: newGame });
+    return NextResponse.json(
+      { game: newGame },
+      {
+        status: 200,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+      }
+    );
   } catch (error) {
     console.error("Error:", error);
     return NextResponse.json({
@@ -148,8 +175,8 @@ export async function POST(req: any, res: NextApiResponse) {
   }
 }
 
-function extractQueryFromRequest(req: NextApiRequest) {
-  const url = new URL(`http://localhost${req.url}`);
+function extractQueryFromRequest(req: Request) {
+  const url = new URL(req.url);
   const params = new URLSearchParams(url.search);
   return {
     id: params.get("id"),

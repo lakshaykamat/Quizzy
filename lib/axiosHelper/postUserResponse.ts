@@ -43,7 +43,6 @@ async function postUserResponseOfQuestions(
         headers: { "Content-Type": "application/json" },
       }
     );
-    console.log(url);
     console.log(response.data);
     return response.data;
   } catch (error) {
