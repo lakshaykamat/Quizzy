@@ -1,65 +1,60 @@
-import Quiz from "@/app/models/Quiz";
-import { connectMongodb } from "@/lib/mongodb";
-import { QuizType } from "@/types";
-import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
-import validateQuizId from "./validateQuizId";
-import { shuffleArray } from "@/lib/utils";
+import { connectMongodb } from "@/lib/mongodb";
+import validateQuizId from "./helpers/validateQuizId";
 import { UserResponse, RequestBody } from "./postRequestBody";
-import getRightAnswer from "./getRightAnswer";
-import Game from "@/app/models/Game";
+import createNewGame from "./helpers/createNewGame";
+import createError from "./helpers/createError";
+import HttpStatusCode from "./helpers/HttpStatusCode";
+import shuffleQuestions from "./helpers/shuffleQuestions";
+import calculateUserResult from "./helpers/calculateUserResult";
+import areAllQuestionsPresent from "./helpers/areAllQuestionsPresent";
+import calculateTotalScore from "./helpers/calculateTotalScore";
+import calculatePercentage from "./helpers/calculatePercentage";
+import extractQueryFromRequest from "./helpers/extractQueryFromRequest";
 
-export async function GET(req: any, res: NextApiResponse) {
+// Common response headers
+const RESPONSE_HEADERS = {
+  "Access-Control-Allow-Origin": "*",
+  "Content-Type": "application/json",
+};
+
+/**
+ * Handler for the GET request.
+ *
+ * @param {Request} req - The HTTP request object.
+ * @returns {NextResponse} - The Next.js response object.
+ */
+export async function GET(req: Request) {
   try {
+    // Connect to MongoDB
     await connectMongodb();
 
+    // Extract parameters from the request
     const { id, limit } = extractQueryFromRequest(req);
 
+    // Validate if 'id' is specified
     if (!id) {
-      return NextResponse.json(
-        {
-          isError: true,
-          message: "Specify 'id' in the query parameters",
-        },
-        {
-          status: 200,
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-          },
-        }
+      const error = createError(
+        "Specify 'id' in query parameters",
+        HttpStatusCode.BadRequest,
+        RESPONSE_HEADERS
       );
+      return NextResponse.json(error.messages, error.header);
     }
 
+    // Validate if the quiz exists
     const { isExist, quiz } = await validateQuizId(id);
-
-    if (!isExist) {
-      console.log(quiz);
-      return NextResponse.json(
-        {
-          quiz,
-          isError: true,
-          message: "Quiz doesn't exist with this id",
-        },
-        {
-          status: 404,
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-          },
-        }
+    if (!isExist || !quiz) {
+      const error = createError(
+        "Quiz doesn't exist with this id",
+        HttpStatusCode.NotFound,
+        RESPONSE_HEADERS
       );
+      return NextResponse.json(error.messages, error.header);
     }
 
-    // Simplify the shuffling logic
-    const shuffledQuestionsList = shuffleArray(quiz?.questionsList || []).slice(
-      0,
-      limit
-    );
-    shuffledQuestionsList.forEach((question) => {
-      question.options = shuffleArray(question.options);
-    });
-
+    // Shuffle questions and send response
+    const shuffledQuestionsList = shuffleQuestions(quiz.questionsList, limit);
     return NextResponse.json(
       {
         quizId: quiz?._id,
@@ -68,118 +63,115 @@ export async function GET(req: any, res: NextApiResponse) {
       },
       {
         status: 200,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
+        headers: RESPONSE_HEADERS,
       }
     );
-  } catch (error) {
-    console.error("Error:", error);
-    return NextResponse.json({
-      isError: true,
-      message: "Internal Server Error",
-    });
+  } catch (err) {
+    // Handle errors and send an error response
+    console.error("GET Error:", err);
+    const error = createError(
+      "Internal Server Error",
+      HttpStatusCode.InternalServerError,
+      RESPONSE_HEADERS
+    );
+    return NextResponse.json(error.messages, error.header);
   }
 }
 
-export async function POST(req: any, res: NextApiResponse) {
+/**
+ * Handler for the POST request.
+ *
+ * @param {Request} req - The HTTP request object.
+ * @returns {NextResponse} - The Next.js response object.
+ */
+export async function POST(req: Request) {
   try {
+    // Connect to MongoDB
     await connectMongodb();
-    //@ts-ignore
+
+    // Parse request body
     const data: RequestBody = await req.json();
     const userResponse: UserResponse[] = data.userResponse;
 
-    const { isExist, quiz } = await validateQuizId(data.quizId);
-
-    if (!isExist || !quiz) {
-      return NextResponse.json(
-        {
-          isError: true,
-          message: "Quiz does not exist with this id",
-        },
-        {
-          status: 404,
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-          },
-        }
+    // Validate if 'quizId' is specified
+    if (!data.quizId) {
+      const error = createError(
+        "Specify 'quizId' in response",
+        HttpStatusCode.BadRequest,
+        RESPONSE_HEADERS
       );
+      return NextResponse.json(error.messages, error.header);
     }
 
-    const userResult = await Promise.all(
-      userResponse.map(async (response) => {
-        const rightAnswer = await getRightAnswer(
-          response.question.id,
-          data.quizId
-        );
-        if (!rightAnswer)
-          return {
-            ...response,
-            rightAnswer: null,
-            isCorrect: null,
-          };
+    // Validate if the quiz exists
+    const { isExist, quiz } = await validateQuizId(data.quizId);
+    if (!isExist || !quiz) {
+      const error = createError(
+        "Quiz does not exist with this id",
+        HttpStatusCode.NotFound,
+        RESPONSE_HEADERS
+      );
+      return NextResponse.json(error.messages, error.header);
+    }
 
-        return {
-          ...response,
-          rightAnswer,
-          isCorrect: rightAnswer === response.userChoice,
-        };
-      })
+    // Check if all questions in the user response belong to the quiz
+    const allQuestionsPresent = areAllQuestionsPresent(
+      quiz.questionsList,
+      userResponse
+    );
+    if (!allQuestionsPresent) {
+      const error = createError(
+        "QuizId doesn't belong to these questions",
+        HttpStatusCode.BadRequest,
+        RESPONSE_HEADERS
+      );
+      return NextResponse.json(error.messages, error.header);
+    }
+
+    // Calculate user result
+    const userResult = await calculateUserResult(
+      userResponse,
+      data.quizId,
+      quiz.questionsList
+    );
+    if (!userResult || userResult.length === 0) {
+      const error = createError(
+        "Error calculating user result",
+        HttpStatusCode.InternalServerError,
+        RESPONSE_HEADERS
+      );
+      return NextResponse.json(error.messages, error.header);
+    }
+
+    // Calculate total score and percentage
+    const totalScore = calculateTotalScore(userResult);
+    const percentage = calculatePercentage(totalScore, userResponse.length);
+
+    // Create a new game
+    const newGame = await createNewGame(
+      data.quizId,
+      totalScore,
+      percentage,
+      userResponse.length,
+      userResult
     );
 
-    if (!userResult) {
-      return NextResponse.json(
-        {
-          isError: true,
-          message: "Something went wrong!",
-        },
-        {
-          status: 500,
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-          },
-        }
-      );
-    }
-
-    const totalScore = userResult.filter((result) => result?.isCorrect).length;
-    const percentage = ((totalScore / userResponse.length) * 100).toFixed(2);
-
-    const newGame = await Game.create({
-      totalScore,
-      percen: parseFloat(percentage),
-      totalQuestions: userResponse.length,
-      userId: "USER_ID",
-      quizId: data.quizId,
-      userResult,
-    });
+    // Send success response with the new game data
     return NextResponse.json(
       { game: newGame },
       {
         status: 200,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
+        headers: RESPONSE_HEADERS,
       }
     );
-  } catch (error) {
-    console.error("Error:", error);
-    return NextResponse.json({
-      isError: true,
-      message: "Internal Server Error",
-    });
+  } catch (err) {
+    // Handle errors and send an error response
+    console.error("POST Error:", err);
+    const error = createError(
+      "Internal Server Error",
+      HttpStatusCode.InternalServerError,
+      RESPONSE_HEADERS
+    );
+    return NextResponse.json(error.messages, error.header);
   }
-}
-
-function extractQueryFromRequest(req: Request) {
-  const url = new URL(req.url);
-  const params = new URLSearchParams(url.search);
-  return {
-    id: params.get("id"),
-    limit: parseInt(params.get("limit") || "10", 10),
-  };
 }
