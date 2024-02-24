@@ -1,4 +1,5 @@
 "use client";
+import { Progress } from "@/components/ui/progress";
 import AXIOS from "@/lib/axiosHelper";
 import { UserResult } from "@/lib/axiosHelper/fetchGameData";
 import { Options } from "@/types";
@@ -29,13 +30,14 @@ const FinalPage = ({ params }: { params: { gameId: string } }) => {
     );
     return (
       <div className="">
-        <div className="flex items-center my-7 gap-6">
+        <div className="flex flex-col sm:flex-row items-center my-7 gap-6">
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-6xl">
             {gameData.game.percen}%
           </h1>
           <p className="text-3xl mb-2">Can do better :(</p>
         </div>
-        <div className="flex gap-6 mb-6">
+        <Progress className="my-4 " value={Number(gameData.game.percen)} />
+        <div className="flex items-center justify-center sm:justify-start flex-wrap gap-6 mb-6">
           <p>
             <span className="text-bold">Question attempted:</span>{" "}
             {gameData.game.totalQuestions}
@@ -60,32 +62,33 @@ const WrongAnswerSection = ({
 }) => {
   if (wrongAnswers.length === 0) return;
   return (
-    <div className="bg-destructive p-10 mb-12 rounded-3xl">
-      <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mb-5">
+    <div className="mx-auto xl:max-w-2xl mb-12">
+      <h4 className="scroll-m-20 text-xl font-semibold tracking-tight mb-6 mt-2">
         Wrong answers
-      </h2>
+      </h4>
       {wrongAnswers.map((question, index) => {
         return (
           <div key={question.question.id + index} className="mb-8">
-            <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
+            <h4 className="text-base font-medium tracking-normal">
               {`Q${index + 1}. ${question.question.question}`}
             </h4>
             {question.question.options.map((option: Options) => {
               return (
                 <div
                   key={option.text}
-                  className={`${option.isRight && "bg-green-700"} ${
-                    question.userChoice === option.text && "bg-yellow-700"
-                  } px-5 py-1 rounded-xl mt-1`}
+                  className={`${option.isRight && "bg-green-500"} ${
+                    question.userChoice === option.text && "bg-yellow-500"
+                  } px-5 py-1 rounded-lg mt-1 flex items-center`}
                 >
                   <input type="radio" disabled={true} />
-                  <label className="ml-4">{option.text}</label>
+                  <label className="ml-4 text-base">{option.text}</label>
                 </div>
               );
             })}
 
-            <p className="leading-7 [&:not(:first-child)]:mt-2">
-              {`Explanation: ${question.question.explanation}`}
+            <p className="leading-7 text-base [&:not(:first-child)]:mt-2">
+              <span className="font-bold">Explanation: </span>
+              {question.question.explanation}
             </p>
           </div>
         );
@@ -101,14 +104,14 @@ const RightAnswerSection = ({
   if (rightAnswers.length === 0) return;
 
   return (
-    <div className="bg-green-900 p-10 mb-12 rounded-3xl">
-      <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mb-5">
+    <div className="mx-auto xl:max-w-2xl mb-12">
+      <h4 className="scroll-m-20 text-xl font-semibold tracking-tight mb-6 mt-2">
         Right answers
-      </h2>
+      </h4>
       {rightAnswers.map((question, index) => {
         return (
           <div key={question.question.id + index} className="mb-8">
-            <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
+            <h4 className="text-base font-medium tracking-normal">
               {`Q${index + 1}. ${question.question.question}`}
             </h4>
             {question.question.options.map((option: Options) => {
@@ -116,17 +119,18 @@ const RightAnswerSection = ({
                 <div
                   key={option.text}
                   className={`${
-                    question.userChoice === option.text && "bg-green-600"
-                  } px-5 py-1 rounded-xl mt-1`}
+                    option.isRight && "bg-green-500"
+                  } px-5 py-1 rounded-lg mt-1 flex items-center`}
                 >
                   <input type="radio" disabled={true} />
-                  <label className="ml-4">{option.text}</label>
+                  <label className="ml-4 text-base">{option.text}</label>
                 </div>
               );
             })}
 
-            <p className="leading-7 [&:not(:first-child)]:mt-2">
-              {`Explanation: ${question.question.explanation}`}
+            <p className="leading-7 text-base [&:not(:first-child)]:mt-2">
+              <span className="font-bold">Explanation: </span>
+              {question.question.explanation}
             </p>
           </div>
         );
