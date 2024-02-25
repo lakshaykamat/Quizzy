@@ -8,7 +8,3 @@ export const connectMongodb = async () => {
     console.log("Error: Failed to connect to database");
   }
 };
-// const main = async () => {
-//   connectMongodb();
-// };
-// main();
