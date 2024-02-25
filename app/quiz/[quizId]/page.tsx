@@ -13,7 +13,7 @@ const Page = ({ params }: { params: { quizId: string } }) => {
     isLoading,
   } = useSWR(
     () =>
-      `${process.env.NEXT_PUBLIC_WEB_URL}/questions?id=${quizId}&limit=${2}`,
+      `${process.env.NEXT_PUBLIC_WEB_URL}/questions?id=${quizId}&limit=${7}`,
     AXIOS.fetchQuestionsList,
     {
       revalidateOnFocus: false, // Disable refetching on focus

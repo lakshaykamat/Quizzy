@@ -35,3 +35,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 playground-2.mongodb.js
+
+*.json
+
+lib/data/
